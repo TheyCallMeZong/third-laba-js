@@ -2,10 +2,10 @@
   "name": "untitled2",
   "version": "1.0.0",
   "description": "",
-  "main": "index1.js",
+  "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack serve --open"
+    "build": "../node_modules/.bin/webpack",
+    "start": "../node_modules/.bin/webpack serve --open"
   },
   "author": "SK",
   "license": "ISC",
