@@ -32,13 +32,12 @@ document.getElementById("btn").addEventListener("click", function (){
 	const depositType = document.getElementById("depositType").value;
 	const depositTerm = document.getElementById("depositTerm").value;
 	const depositAmount = document.getElementById("depositAmount").value;
-
 	if (depositType === "none" || depositTerm === "none"){
 		alert("Вы не указали вид вклада или срок вклада")
 		return
 	}
 
-	if (isNaN(depositAmount)){
+	if (depositAmount === "" || isNaN(depositAmount)){
 		alert("Укажите число")
 		return
 	}

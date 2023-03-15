@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<header>
+    <label>
+        <input type="text" id="search-input" placeholder="Должность">
+    </label>
+    <label>
+        <input type="text" id="location-input" placeholder="Регион">
+    </label>
+    <button type="submit" id="btn">Поиск</button>
+</header>
 <div class="job-search-widget">
-    <form>
-        <label for="search-input">Job title:</label>
-        <input type="text" id="search-input">
-        <label for="location-input">Location:</label>
-        <input type="text" id="location-input">
-        <button type="submit" id="search-button">Search</button>
-    </form>
     <ul id="job-listings"></ul>
 </div>
-
 </body>
-<script src="index1.js"></script>
 </html>

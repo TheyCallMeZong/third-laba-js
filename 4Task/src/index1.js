@@ -2,25 +2,42 @@ import './index1.css';
 
 const axios = require('axios');
 
-const form = document.querySelector('form');
+const form = document.getElementById('btn');
 const locationInput = document.querySelector('#location-input');
-const jobListings = document.querySelector('#job-listings');
 const searchInput = document.querySelector('#search-input');
+const jobListings = document.querySelector('#job-listings');
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const searchText = searchInput.value;
-    const locationName = locationInput.value;
+form.addEventListener('click', () => {
+    let locationName = locationInput.value;
+    locationName = locationName.charAt(0).toUpperCase() + locationName.slice(1);
+    let searchText = searchInput.value;
+    searchText = searchText.charAt(0).toUpperCase() + searchText.slice(1);
     let localId = 0;
-    axios
-        .get(`https://api.hh.ru/areas`)
+    if (searchText.length === 0) {
+        alert("Укажите вакансию!")
+        return
+    }
+    if (locationName.length === 0) {
+        alert("Укажите город!")
+        return
+    }
+    axios.get(`https://api.hh.ru/areas/`)
         .then((response) => {
-            for (let e of response.data){
-                for (let a of e.areas){
-                    if (a.name === locationName){
+            for (let e of response.data) {
+                for (let a of e.areas) {
+                    if (a.name === locationName) {
                         localId = a.id
                     }
+                    for (let c of a.areas) {
+                        if (c.name === locationName) {
+                            localId = c.id;
+                        }
+                    }
                 }
+            }
+            if (localId === 0) {
+                alert("Город не найден")
+                return
             }
             axios
                 .get(`https://api.hh.ru/vacancies`, {
@@ -35,10 +52,8 @@ form.addEventListener('submit', (event) => {
                         const jobListing = document.createElement('li');
                         jobListing.classList.add('job-listing');
                         jobListing.innerHTML = `
-              <h2>${item.name}</h2>
-              <p>${item.employer.name} - ${item.area.name}</p>
-              <a href="${item.alternate_url}" target="_blank">Apply now</a>
-            `;
+              <h2>${item.name}</h2>              <p>${item.employer.name} - ${item.area.name}</p>
+              <a href="${item.alternate_url}" target="_blank">Apply now</a>`;
                         jobListings.appendChild(jobListing);
                     });
                 })
