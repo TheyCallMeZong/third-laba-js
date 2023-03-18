@@ -9,10 +9,13 @@ const jobListings = document.querySelector('#job-listings');
 
 form.addEventListener('click', () => {
     let locationName = locationInput.value;
+    locationName = locationName.trim().replace(/\s+$/g, "");
     locationName = locationName.charAt(0).toUpperCase() + locationName.slice(1);
     let searchText = searchInput.value;
+    searchText = searchText.trim().replace(/\s+$/g, "");
     searchText = searchText.charAt(0).toUpperCase() + searchText.slice(1);
     let localId = 0;
+    
     if (searchText.length === 0) {
         alert("Укажите вакансию!")
         return
